@@ -1,11 +1,7 @@
 
-type Include_type
-	data_ptr   as UByte Ptr
-	data_len   as ULong
-END TYPE
 
 #Macro Macro_IncCommunEx(label , file , sectionName)
-    dim label##_data as UByte Ptr
+	dim label##_data as UByte Ptr
     dim label##_size as ULong
     #If __FB_DEBUG__
         asm jmp .LT_END_OF_FILE_##label##_DEBUG_JMP
@@ -27,22 +23,24 @@ END TYPE
     asm .LT_SKIP_FILE_##label##:
     asm mov dword ptr [label##_data] , offset .LT_START_OF_FILE_##label
     asm mov dword ptr [label##_size] , offset __##label##__len
-    label##_type.data_ptr = label##_data
-    label##_type.data_len = label##_size
+	label##_ptr = label##_data
+	label##_len = label##_size
 #EndMacro
 
 #Macro Macro_IncFileEx(label , file , sectionName)
     #ifndef __INC__##label##__DEF__
         #define __INC__##label##__DEF__
         #If __FUNCTION__ = "__FB_MAINPROC__"
-            dim label##_type as Include_type
-            sub Sub_Inc_##label##(byref label##_type as Include_type)
-                Macro_IncCommunEx(label , file , sectionName)
+            dim shared label##_ptr as UByte Ptr
+			dim shared label##_len as ULong
+            sub Sub_Inc_##label##()
+                Macro_IncCommunEx( label , file , sectionName )
             end sub
-            Sub_Inc_##label##( label##_type)
+            Sub_Inc_##label##()
         #else
-            dim label##_type as Include_type
-            Macro_IncCommunEx(label , file , sectionName)
+			dim label##_ptr as UByte Ptr
+			dim label##_len as ULong
+            Macro_IncCommunEx( label , file , sectionName )
         #endif
     #else
         #error ===> error ##label## already defined
@@ -53,16 +51,16 @@ END TYPE
 
 sub SubName()
     Macro_IncFileEx(EXE2 , "test32.exe" , .Data)
-    print EXE2_type.data_len ,, EXE2_type.data_ptr
+    print EXE2_len ,, EXE2_ptr
 END SUB
 
 Macro_IncFileEx(EXE , "test32.exe" , .Data)
-print EXE_type.data_len ,, EXE_type.data_ptr
+print EXE_len ,, EXE_ptr
 
 SubName()
 SubName()
 Macro_IncFileEx(EXE3 , "test32.exe" , .Data)
-print EXE3_type.data_len ,, EXE3_type.data_ptr
+print EXE3_len ,, EXE3_ptr
 sleep
 
 ' -gen gcc -O 2
