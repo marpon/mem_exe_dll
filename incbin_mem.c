@@ -25,25 +25,25 @@ extern unsigned char end_##name[0] ;
 
 
 #define INCBIN_EX(symname, sizename, filename, section)    \
-	extern unsigned char symname[] asm ( #symname );       \
+    extern unsigned char symname[] asm ( #symname );       \
     extern unsigned int sizename asm ( #sizename );        \
     __asm__ (".section " #section );                       \
-	__asm__ (".balign 4");                                 \
-	__asm__ (".globl " #symname);                          \
+    __asm__ (".balign 4");                                 \
+    __asm__ (".globl " #symname);                          \
     __asm__ (#symname ":");                                \
-	__asm__ (".incbin \"" filename "\"");                  \
+    __asm__ (".incbin \"" filename "\"");                  \
     __asm__ (".section " #section );                       \
-	__asm__ (".balign 1");                                 \
+    __asm__ (".balign 1");                                 \
     __asm__ (#symname "_end:");                            \
     __asm__ (".section " section);                         \
-	__asm__ (".balign 4");                                 \
-	__asm__ (".globl " #sizename);                         \
+    __asm__ (".balign 4");                                 \
+    __asm__ (".globl " #sizename);                         \
     __asm__ (#sizename ":");                               \
-	__asm__ (".long " #symname "_end - " #symname ); 
+    __asm__ (".long " #symname "_end - " #symname ); 
     
     
 #define INCFILE(symname, filename)                         \
-	INCBIN_EX( symname , symname##_len , filename, ".rodata")
+   INCBIN_EX( symname , symname##_len , filename, ".rodata")
 
 
 void show(unsigned char *s1 , size_t j)
