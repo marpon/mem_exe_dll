@@ -1,7 +1,7 @@
 
 
 #Macro Macro_IncCommunEx(label , file , sectionName)
-	dim label##_data as UByte Ptr
+    dim label##_data as UByte Ptr
     dim label##_size as ULong
     #If __FB_DEBUG__
         asm jmp .LT_END_OF_FILE_##label##_DEBUG_JMP
