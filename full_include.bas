@@ -63,6 +63,6 @@ Macro_IncFileEx(EXE3 , "test32.exe" , .Data)
 print EXE3_len ,, EXE3_ptr
 sleep
 
-' -gen gcc -O 2
+
 
 
