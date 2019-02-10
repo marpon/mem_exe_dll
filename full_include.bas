@@ -32,7 +32,7 @@
         #define __INC__##label##__DEF__
         #If __FUNCTION__ = "__FB_MAINPROC__"
             dim shared label##_ptr as UByte Ptr
-			dim shared label##_len as ULong
+		dim shared label##_len as ULong
             sub Sub_Inc_##label##()
                 Macro_IncCommunEx( label , file , sectionName )
             end sub
