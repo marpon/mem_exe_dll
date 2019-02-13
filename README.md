@@ -17,7 +17,7 @@ The only limitation of these tools is you can only use existing dll/exe 32bits w
 and same limitation on 64bits, only dll/exe 64bits with 64bits main prog.
 I've tried to execute 32bits exe into 64bits but did not succeed, if somebody knows how to do...
 
-Obviously, you cannot strip from dll the code you don't use, so the resulting exe increase by the size of your embedded exe/dll.
+Obviously, you cannot strip from dll the code you don't use, so the resulting exe will increase by the size of your embedded exe/dll.
 
 Sure, you can add compression too to reduce the size of embedeed files, but you have in that case, to hold some code to uncompress the embedeed files at run time.
 
@@ -26,7 +26,7 @@ I let that extension as an exercice for the one's who want to make it.
 Last point, when executing exe from memory, some anti-virus react as false positive virus,
 when testing on virus total got 5 AV tools heuristic detection.
 
-Whith only dll from memory, no problem.
+With only dll from memory, no problem.
 
 interrested on your remarks  marpon@aliceadsl.fr
 
